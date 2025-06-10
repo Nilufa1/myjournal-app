@@ -193,6 +193,31 @@ const Home = (
     };
   }, [sidebarOpen]);
 
+  // Logout modal auto-close
+  useEffect(() => {
+    if (!logoutConfirm) return;
+
+    const handleClickOutside = (event) => {
+      const modal = document.querySelector(".logout-modal-content");
+
+      // If clicked outside modal content, close the modal
+      if (modal && !modal.contains(event.target)) {
+        setLogoutConfirm(false);
+      }
+    };
+
+    // Add event listener on next tick to avoid interference with modal opening
+    const timeoutId = setTimeout(() => {
+      document.addEventListener("click", handleClickOutside);
+    }, 0);
+
+    return () => {
+      clearTimeout(timeoutId);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [logoutConfirm]);
+
+
   const handleDeleteEntry = async (index) => {
     const entry = filteredEntries[index]; // Use filteredEntries instead of entries
 
@@ -461,7 +486,7 @@ const Home = (
             <p>Are you sure you want to logout?</p>
             <div className="logout-modal-actions">
               <button className="yes-btn" onClick={handleConfirmLogout}>
-                Yes, Logout
+                Yes
               </button>
               <button className="no-btn" onClick={handleCancelLogout}>
                 Cancel

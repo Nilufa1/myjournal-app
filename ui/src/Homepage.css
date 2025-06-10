@@ -281,13 +281,13 @@ li button:hover {
   box-shadow: 0 5px 22px rgba(0, 0, 0, 0.2);
   z-index: 999;
   /* High value ensures it appears above everything */
-  width: 150px;
+  width: 200px;
   /* Adjust width for better visibility */
 }
 
 .logout-modal p {
   font-size: 22px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .logout-modal button {
